@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+.rolodex {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 450px;
+  transform: translate(-50%, -50%);
+}
+.rolodex_holder,
+.rolodex_prev,
+.rolodex_next,
+.rolodex-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.rolodex_holder {
+  z-index: 1;
+  height: 100%;
+  perspective: 675px;
+}
+.rolodex_prev,
+.rolodex_next {
+  z-index: 2;
+  height: 50%;
+}
+.rolodex_next {
+  cursor: s-resize;
+}
+.rolodex_prev {
+  top: 50%;
+  cursor: n-resize;
+}
+.rolodex-fold {
+  display: none;
+}
+.rolodex-card {
+  border: 2px #c0c0c0 solid;
+  border-bottom-width: 1px;
+  border-radius: 13.333333333333334px 13.333333333333334px 0 0;
+  background: #d3d3d3;
+  font-family: sans-serif;
+  font-size: 180px;
+  line-height: 225px;
+  text-align: center;
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+}
+.rolodex-card.to-fold {
+  z-index: 2;
+}
+.rolodex-card,
+.rolodex-fold ~ .rolodex-card.to-fold {
+  z-index: 1;
+}
+.rolodex-card:not(:first-child) {
+  transition: transform 2s, z-index 2s;
+}
+.rolodex-card:last-child {
+  transition: transform 2s;
+}
+.rolodex-card.to-fold:not(:last-child),
+.rolodex-fold ~ .rolodex-card:not(.to-fold) {
+  transform: rotateX(-180deg);
+}
