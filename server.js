@@ -42,6 +42,13 @@ app.engine(
     extname: "hbs",
     defaultLayout: "layout",
     layoutsDir: __dirname + "/views/layouts/",
+    helpers: {
+      section: function (name, options) {
+        if (!this._sections) this._sections = {};
+        this._sections[name] = options.fn(this);
+        return null;
+      },
+    },
   })
 );
 app.set("views", path.join(__dirname, "views"));
@@ -59,7 +66,7 @@ var hbsContent = {
   userName: "",
   loggedin: false,
   title: "You are not logged in today",
-  body: "Hello World",
+  body: "",
 };
 
 // middleware function to check for logged-in users

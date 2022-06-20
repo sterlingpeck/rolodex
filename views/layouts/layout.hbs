@@ -8,6 +8,7 @@
         {{/if}}
     </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/styles/style.css"/>
   </head>
   <body class="container">
     <div class="page-header">
@@ -20,7 +21,7 @@
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
           <li><a href="/signup">Sign Up</a></li>
-          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/dashboard">Your Rolodex</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -33,9 +34,9 @@
       </div>
       </div>
     </nav>
-    <p>asdfa</p>
-    {{#if loggedin}}
-            <section class="main-container">
+
+  {{#if loggedin}}
+  <section class="main-container">
   <div class="deck"></div>
   <div class="new-contact-container">
     <div class="new-contact-section">
@@ -50,7 +51,6 @@
         <label for="phone">Phone Number:</label><br />
         <input type="tel" id="contact-phone" name="phone" /><br />
       </form>
-
       <div class="icons">
         <button type="submit" value="Submit" id="save-contact">
           Submit
@@ -59,7 +59,13 @@
     </div>
   </div>
 </section>
-          {{/if}}
+{{/if}}
+
     {{{body}}}
+
+<script src="/public/js/contact-form.js"></script>
+<script src="/public/js/rolodex.js"></script>
+
+
   </body>
 </html>
