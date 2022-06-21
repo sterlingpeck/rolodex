@@ -7,7 +7,7 @@ let contactCardContainer = document.querySelector(".savedContactInfoList");
 let firstName = document.querySelector("#firstName");
 let lastName = document.querySelector("#lastName");
 let phone = document.querySelector("#phone");
-let address = document.querySelector("#address");
+let email = document.querySelector("#email");
 
 let searchContactList = document.querySelector(".search");
 
@@ -65,7 +65,7 @@ function displayContactCard() {
                   </div>
                   <div class="savedContact">
                     <i class="fas fa-map-marker-alt"></i>
-                      <p type="text" name="savedContactAddress" class="savedContactAddress" value="">
+                      <p type="text" name="savedContactEmail" class="savedContactEmail" value="">
                       ${contactsStorage[i][3]}
                       </p>
                   </div>
