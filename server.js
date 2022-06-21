@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(
   session({
     key: "user_sid",
-    secret: "somerandonstuffs",
+    secret: "secret secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -42,13 +42,6 @@ app.engine(
     extname: "hbs",
     defaultLayout: "layout",
     layoutsDir: __dirname + "/views/layouts/",
-    helpers: {
-      section: function (name, options) {
-        if (!this._sections) this._sections = {};
-        this._sections[name] = options.fn(this);
-        return null;
-      },
-    },
   })
 );
 app.set("views", path.join(__dirname, "views"));
@@ -65,7 +58,7 @@ app.use((req, res, next) => {
 var hbsContent = {
   userName: "",
   loggedin: false,
-  title: "You are not logged in today",
+  title: "You are not logged in.",
   body: "",
 };
 
@@ -134,11 +127,11 @@ app.get("/dashboard", (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     hbsContent.loggedin = true;
     hbsContent.userName = req.session.user.username;
-    //console.log(JSON.stringify(req.session.user));
     console.log(req.session.user.username);
     hbsContent.title = "You are logged in";
-    //res.sendFile(__dirname + '/public/dashboard.html');
-    res.render("index", hbsContent);
+    res.sendFile(__dirname + "/public/html/dashboard.html");
+    // res.render("contactform", hbsContent);
+    // res.render("rolodex", hbsContent);
   } else {
     res.redirect("/login");
   }
