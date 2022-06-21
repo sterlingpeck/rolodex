@@ -21,13 +21,13 @@ function createContactCard() {
     firstName.value != "" &&
     lastName.value != "" &&
     phone.value != "" &&
-    address.value != "";
+    email.value != "";
   if (isNull) {
     contactCardArr = [
       firstName.value,
       lastName.value,
       phone.value,
-      address.value
+      email.value
     ];
 
     contactsStorage.push(contactCardArr);
