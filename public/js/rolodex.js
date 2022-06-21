@@ -77,7 +77,7 @@ function displayContactCard() {
 
     contactCardContainer.innerHTML += htmlStr;
   }
-  // console.log(contactCard);
+  console.log(contactCard);
   // console.log(contactsStorage);
   console.log(document.querySelectorAll(".savedContactInfo"));
 }
