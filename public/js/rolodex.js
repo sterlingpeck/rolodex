@@ -1,6 +1,6 @@
 let contactsStorage = [];
 let contactCardArr = [];
-let createBtn = document.querySelector(".createBtn");
+let createBtn = document.getElementById("btnSave");
 let deleteBtn = document.querySelector(".btnDel");
 let contactCard = document.querySelector(".savedContactInfo");
 let contactCardContainer = document.querySelector(".savedContactInfoList");
@@ -17,10 +17,11 @@ contactCardContainer.addEventListener("click", deleteContactCard);
 
 // Creates a new contact card
 function createContactCard() {
+  console.log("LOL");
   let isNull =
-    firstName.value != "" &&
-    lastName.value != "" &&
-    phone.value != "" &&
+    firstName.value != "" ||
+    lastName.value != "" ||
+    phone.value != "" ||
     email.value != "";
   if (isNull) {
     contactCardArr = [
@@ -78,7 +79,7 @@ function displayContactCard() {
     contactCardContainer.innerHTML += htmlStr;
   }
   console.log(contactCard);
-  // console.log(contactsStorage);
+  console.log(contactsStorage);
   console.log(document.querySelectorAll(".savedContactInfo"));
 }
 
