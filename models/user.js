@@ -2,7 +2,7 @@ var Sequelize = require("sequelize");
 var bcrypt = require("bcrypt");
 
 // create a sequelize instance with our local postgres database information.
-const sequelize = new Sequelize("contactdatabase", "root", "Cnf0dd3r947162!", {
+const sequelize = new Sequelize("contactdatabase", "root", "73bug4Lennon123!", {
   host: "localhost",
   port: 3306,
   dialect: "mysql",
