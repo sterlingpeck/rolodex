@@ -15,9 +15,8 @@ createBtn.addEventListener("click", displayContactCard);
 contactCardContainer.addEventListener("click", deleteContactCard);
 //
 
-// Creates a new contact card
+// Creates new contact card
 function createContactCard() {
-  console.log("LOL");
   let isNull =
     firstName.value != "" ||
     lastName.value != "" ||
@@ -83,7 +82,7 @@ function displayContactCard() {
   console.log(document.querySelectorAll(".savedContactInfo"));
 }
 
-// Search for contact
+//search for contact
 function searchContact() {
   let searchValue = searchContactList.value.toLowerCase();
 
@@ -98,7 +97,7 @@ function searchContact() {
   }
 }
 
-// Remove a contact card from the addressbook
+// Remove contact 
 
 function deleteContactCard(e) {
   if (e.target.classList.contains("btnDel")) {
@@ -109,7 +108,6 @@ function deleteContactCard(e) {
 }
 
 // Clear contact page
-
 function clearContactForm() {
   let clearForm = document.querySelectorAll(".clearForm");
   for (let i in clearForm) {
