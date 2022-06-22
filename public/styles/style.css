@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,900|Noto+Serif:700i&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,900|Noto+Serif:700i&display=swap');
 
 * {
   box-sizing: border-box;
@@ -11,10 +11,10 @@ body {
   /* center the deck horizontally */
   display: flex;
   justify-content: center;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
 }
 /* give the deck a fixed width and height */
-.deck {
+.savedContactInfo {
   margin: 3rem 0;
   width: 350px;
   height: 250px;
@@ -26,8 +26,8 @@ body {
 }
 
 /* with a pseudo element add two rectangles at the bottom of the deck, to create the hinges of the rolodex */
-.deck:after {
-  content: "";
+.savedContactInfo:after {
+  content: '';
   position: absolute;
   top: 100%;
   left: 0;
