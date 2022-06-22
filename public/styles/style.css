@@ -1,3 +1,14 @@
-.card-grid {
+.savedContactInfoList {
   display: flex;
+  flex-wrap: wrap;
+}
+.savedContact {
+  width: 200px;
+}
+.savedContactInfo {
+box-shadow: 2px 2px 2px black;
+border: 1px solid black;
+padding: 10px;
+margin: 5px;
+border-radius: 10px;
 }
