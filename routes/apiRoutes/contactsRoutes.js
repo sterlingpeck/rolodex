@@ -4,7 +4,16 @@ const db = require("../../config/connection");
 
 // Create a contact
 router.post("/api/contactpost", ({ body }, res) => {
-  const sql = `INSERT INTO contact_card (firstname, lastname, email, phone) VALUES (?,?,?,?)`;
+  let sql =
+    "INSERT INTO contact_card (firstname, lastname, email, phone, created_at, updated_at) VALUES ('" +
+    body.firstname +
+    "', '" +
+    body.lastname +
+    "', '" +
+    body.email +
+    "','" +
+    body.phone +
+    "', now(), now())";
   console.log(body);
   const params = [body.firstname, body.lastname, body.email, body.phone];
   db.query(sql, params, (err, result) => {
