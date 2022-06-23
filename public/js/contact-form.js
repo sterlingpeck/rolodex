@@ -4,6 +4,8 @@ let contactEmail = document.querySelector("#contact-email");
 let contactPhone = document.querySelector("#contact-phone");
 let contactAddress = document.querySelector("#contact-adress");
 let saveContactBtn = document.querySelector("#save-contact");
+app.use(express.json());
+app.use(express.static('public'));
 
 const handleContactSave = () => {
   const newContact = {
@@ -31,7 +33,7 @@ const handleContactSave = () => {
 
 const getContacts = () =>
   fetch("/api/contactget", {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
