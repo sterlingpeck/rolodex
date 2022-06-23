@@ -9,6 +9,8 @@ var path = require("path");
 
 // invoke an instance of express application.
 var app = express();
+app.use(express.json());
+app.use(express.static('public'));
 
 // set our application port
 app.set("port", 9000);
