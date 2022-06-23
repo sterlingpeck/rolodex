@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,900|Noto+Serif:700i&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,900|Noto+Serif:700i&display=swap");
 
 * {
   box-sizing: border-box;
@@ -12,10 +11,10 @@ body {
   /* center the deck horizontally */
   display: flex;
   justify-content: center;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 }
 /* give the deck a fixed width and height */
-.savedContactInfo {
+.deck {
   margin: 3rem 0;
   width: 350px;
   height: 250px;
@@ -27,8 +26,8 @@ body {
 }
 
 /* with a pseudo element add two rectangles at the bottom of the deck, to create the hinges of the rolodex */
-.savedContactInfo:after {
-  content: '';
+.deck:after {
+  content: "";
   position: absolute;
   top: 100%;
   left: 0;
@@ -161,17 +160,70 @@ body {
   box-shadow: 0 0 2px hsla(0, 0%, 0%, 0.2);
   /* hide the buttons by default */
   opacity: 0;
-=======
-.savedContactInfoList {
+}
+.deck .card button svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: none;
+}
+/* smaller button for the back of the card */
+.deck .card .card--back button {
+  width: 38px;
+  height: 38px;
+}
+/* show the button when hovering the card or focusing on the button */
+.deck .card:hover button,
+.deck .card button:focus {
+  opacity: 1;
+}
+
+/* position the rolodex icon in the bottom right corner */
+svg#rolodex {
+  width: 60px;
+  height: auto;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  display: block;
+}
+/* animate the lines in the #flip group to rotate to 0 */
+svg#rolodex g#flip use {
+  animation: rotate 10s infinite ease-out;
+}
+/* increase the delay for each subsequent line */
+svg#rolodex g#flip use:nth-of-type(2) {
+  animation-delay: 0.2s;
+}
+svg#rolodex g#flip use:nth-of-type(3) {
+  animation-delay: 0.4s;
+}
+svg#rolodex g#flip use:nth-of-type(4) {
+  animation-delay: 0.6s;
+}
+svg#rolodex g#flip use:nth-of-type(5) {
+  animation-delay: 0.8s;
+}
+svg#rolodex g#flip use:nth-of-type(6) {
+  animation-delay: 1s;
+}
+@keyframes rotate {
+  10%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+/* Card styling */
+.contactList {
+  width: 30%;
+  right: 0;
+}
+
+.contacts-container {
   display: flex;
-  flex-wrap: wrap;
->>>>>>> c78e0bbfc8a125c6f703603fc25c7466293a1832
 }
-.savedContact {
-  width: 200px;
-}
+
 .savedContactInfo {
-<<<<<<< HEAD
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   width: 100%;
@@ -179,11 +231,3 @@ body {
   margin-bottom: 1rem;
   /* display: none; */
 }
-=======
-box-shadow: 2px 2px 2px black;
-border: 1px solid black;
-padding: 10px;
-margin: 5px;
-border-radius: 10px;
-}
->>>>>>> c78e0bbfc8a125c6f703603fc25c7466293a1832

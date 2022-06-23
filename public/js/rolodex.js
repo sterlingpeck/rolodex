@@ -44,7 +44,7 @@ function displayContactCard() {
 
   contactCardContainer.innerHTML = "";
   for (let i = 0; i < contactsStorage.length; i++) {
-    htmlStr = `<div class="savedContactInfo" id="savedContactInfo">
+    htmlStr = `<div class="savedContactInfo " id="savedContactInfo">
                     <div class="savedContact">
                     <i class="fas fa-user"></i>
                       <p type="text" name="savedContactFirstName" class="savedContactFirstName" value="">
@@ -76,8 +76,9 @@ function displayContactCard() {
               </div>`;
 
     contactCardContainer.innerHTML += htmlStr;
+
+
   }
-  console.log(contactCard);
   console.log(contactsStorage);
   console.log(document.querySelectorAll(".savedContactInfo"));
 }
