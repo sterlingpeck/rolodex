@@ -6,9 +6,9 @@ CREATE TABLE contact_card (
   firstname VARCHAR(255) NOT NULL,
   lastname VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  phone VARCHAR(255) NOT NULL,
-  created_at DATETIME NOT NULL,
-  updated_at DATETIME NOT NULL
+  phone VARCHAR(255) NOT NULL
+  -- created_at DATETIME NOT NULL,
+  -- updated_at DATETIME NOT NULL
 --   CONSTRAINT fk_dep FOREIGN KEY (dep_id) REFERENCES departments(id) ON DELETE SET NULL
 );
 
