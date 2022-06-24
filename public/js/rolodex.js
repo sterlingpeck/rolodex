@@ -16,7 +16,7 @@ contactCardContainer.addEventListener("click", deleteContactCard);
 //
 
 // Creates new contact card
-function createContactCard() {
+let createContactCard = async (req, res) => {
   let isNull =
     firstName.value != "" ||
     lastName.value != "" ||
@@ -27,13 +27,30 @@ function createContactCard() {
       firstName.value,
       lastName.value,
       phone.value,
-      email.value
+      email.value,
     ];
+
+    const response = await fetch("/api/routes", {
+      method: "POST",
+      headers: {
+        Accept: "application.json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstname: firstName.value,
+        lastname: lastName.value,
+        phone: phone.value,
+        email: email.value,
+      }),
+    });
+
+    const postData = await response.json();
+    console.log(postData);
 
     contactsStorage.push(contactCardArr);
   }
   clearContactForm();
-}
+};
 
 let htmlStr = "";
 
@@ -76,8 +93,6 @@ function displayContactCard() {
               </div>`;
 
     contactCardContainer.innerHTML += htmlStr;
-
-
   }
   console.log(contactsStorage);
   console.log(document.querySelectorAll(".savedContactInfo"));
@@ -98,7 +113,7 @@ function searchContact() {
   }
 }
 
-// Remove contact 
+// Remove contact
 
 function deleteContactCard(e) {
   if (e.target.classList.contains("btnDel")) {

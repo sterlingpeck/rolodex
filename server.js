@@ -7,20 +7,15 @@ var User = require("./models/user");
 var hbs = require("express-handlebars");
 var path = require("path");
 const { v4: uuidv4 } = require("uuid");
+const sequelize = require("./config/connection");
+
 // const db = require("./db/db.sql");
-const mysql = require('mysql2');
-const db = mysql.createConnection(
-  {
-    host: 'localhost',
-    user: 'root',
-    password: '73bug4Lennon123!',
-    database: 'contactdatabase'
-  });
+// const mysql = require("mysql2");
 
 // invoke an instance of express application.
 var app = express();
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // set our application port
 app.set("port", 9000);
@@ -135,20 +130,14 @@ app
   });
 
 app.get("/api/contactget", ({ body }, res) => {
-    db.query(
-        `SELECT * FROM contact_card`,
-        function (err, results, fields) {
-            if (err) {
-                console.log(err.message);
-                return;
-            }
-            console.table(results);
-        }
-    );
-})
-
-
-
+  db.query(`SELECT * FROM contact_card`, function (err, results, fields) {
+    if (err) {
+      console.log(err.message);
+      return;
+    }
+    console.table(results);
+  });
+});
 
 // route for user's dashboard
 app.get("/dashboard", (req, res) => {

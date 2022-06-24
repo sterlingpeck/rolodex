@@ -1,9 +1,8 @@
 var Sequelize = require("sequelize");
-var bcrypt = require("bcrypt");
 const sequelize = require("../config/connection");
 
 // setup User model and its fields.
-var User = sequelize.define("users", {
+var Contact = sequelize.define("contact_cards", {
   id: {
     type: Sequelize.INTEGER,
     unique: true,
@@ -11,35 +10,34 @@ var User = sequelize.define("users", {
     primaryKey: true,
     autoIncrement: true,
   },
-  username: {
+  firstname: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  lastname: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
   },
-  password: {
+  phone: {
     type: Sequelize.STRING,
+    unique: true,
     allowNull: false,
   },
 });
-
-User.beforeCreate((user, options) => {
-  const salt = bcrypt.genSaltSync();
-  user.password = bcrypt.hashSync(user.password, salt);
-});
-
-User.prototype.validPassword = function (password) {
-  return bcrypt.compareSync(password, this.password);
-};
 
 // create all the defined tables in the specified database.
 sequelize
   .sync()
   .then(() =>
     console.log(
-      "users table has been successfully created, if one doesn't exist"
+      "contact_cards table has been successfully created, if one doesn't exist"
     )
   )
   .catch((error) => console.log("This error occured", error));
 
-// export User model for use in other files.
-module.exports = User;
+module.exports = Contact;
