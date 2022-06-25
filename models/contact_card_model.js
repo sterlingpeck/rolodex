@@ -2,7 +2,7 @@ var Sequelize = require("sequelize");
 const sequelize = require("../config/connection");
 
 // setup User model and its fields.
-var Contact = sequelize.define("contact_cards", {
+var Contact = sequelize.define("contact_card", {
   id: {
     type: Sequelize.INTEGER,
     unique: true,

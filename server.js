@@ -7,29 +7,22 @@ var User = require("./models/user");
 var hbs = require("express-handlebars");
 var path = require("path");
 const { v4: uuidv4 } = require("uuid");
-const sequelize = require("./config/connection");
+const db = require("./config/connection");
+const { QueryTypes } = require("sequelize");
+var Contact = require("./models/contact_card_model");
 
-// const db = require("./db/db.sql");
-// const mysql = require("mysql2");
-
-// invoke an instance of express application.
 var app = express();
 app.use(express.json());
 app.use(express.static("public"));
 
-// set our application port
 app.set("port", 9000);
 
-// set morgan to log info about our requests for development use.
 app.use(morgan("dev"));
 
-// initialize body-parser to parse incoming parameters requests to req.body
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// initialize cookie-parser to allow us access the cookies stored in the browser.
 app.use(cookieParser());
 
-// initialize express-session to allow us track the logged-in user across sessions.
 app.use(
   session({
     key: "user_sid",
@@ -53,8 +46,6 @@ app.engine(
 );
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
-// This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
-// This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
 app.use((req, res, next) => {
   if (req.cookies.user_sid && !req.session.user) {
     res.clearCookie("user_sid");
@@ -69,7 +60,6 @@ var hbsContent = {
   body: "",
 };
 
-// middleware function to check for logged-in users
 var sessionChecker = (req, res, next) => {
   if (req.session.user && req.cookies.user_sid) {
     res.redirect("/dashboard");
@@ -86,15 +76,12 @@ app.get("/", sessionChecker, (req, res) => {
 // route for user signup
 app
   .route("/signup")
-  //.get(sessionChecker, (req, res) => {
   .get((req, res) => {
-    //res.sendFile(__dirname + '/public/signup.html');
     res.render("signup", hbsContent);
   })
   .post((req, res) => {
     User.create({
       username: req.body.username,
-      //email: req.body.email,
       password: req.body.password,
     })
       .then((user) => {
@@ -110,7 +97,6 @@ app
 app
   .route("/login")
   .get(sessionChecker, (req, res) => {
-    //res.sendFile(__dirname + '/public/login.html');
     res.render("login", hbsContent);
   })
   .post((req, res) => {
@@ -129,13 +115,21 @@ app
     });
   });
 
-app.get("/api/contactget", ({ body }, res) => {
-  db.query(`SELECT * FROM contact_card`, function (err, results, fields) {
-    if (err) {
-      console.log(err.message);
-      return;
-    }
-    console.table(results);
+// Create a contact
+app.post("/api/contactpost", ({ body }, res) => {
+  Contact.create({
+    firstname: body.firstname,
+    lastname: body.lastname,
+    email: body.email,
+    phone: body.phone,
+  }).then(function (contact) {
+    res.send(contact);
+  });
+});
+
+app.get("/api/contactget", (req, res) => {
+  Contact.findAll().then(function (contacts) {
+    res.send(contacts);
   });
 });
 
@@ -147,8 +141,6 @@ app.get("/dashboard", (req, res) => {
     console.log(req.session.user.username);
     hbsContent.title = "You are logged in";
     res.sendFile(__dirname + "/public/html/dashboard.html");
-    // res.render("contactform", hbsContent);
-    // res.render("rolodex", hbsContent);
   } else {
     res.redirect("/login");
   }

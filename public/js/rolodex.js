@@ -13,10 +13,22 @@ let searchContactList = document.querySelector(".search");
 
 createBtn.addEventListener("click", displayContactCard);
 contactCardContainer.addEventListener("click", deleteContactCard);
-//
+createBtn.addEventListener("click", handleContactSave);
+
+fetch("/api/contactget")
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Success:", data);
+    contactsStorage.push(...data);
+    console.log(contactsStorage, "string");
+    displayContactCard();
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
 
 // Creates new contact card
-let createContactCard = async (req, res) => {
+function createContactCard() {
   let isNull =
     firstName.value != "" ||
     lastName.value != "" ||
@@ -30,34 +42,17 @@ let createContactCard = async (req, res) => {
       email.value,
     ];
 
-    const response = await fetch("/api/routes", {
-      method: "POST",
-      headers: {
-        Accept: "application.json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstname: firstName.value,
-        lastname: lastName.value,
-        phone: phone.value,
-        email: email.value,
-      }),
-    });
-
-    const postData = await response.json();
-    console.log(postData);
-
     contactsStorage.push(contactCardArr);
   }
-  clearContactForm();
-};
+  // clearContactForm();
+}
 
 let htmlStr = "";
 
 function displayContactCard() {
   // Loop over the array contactsStorage and insert into the contact page
 
-  createContactCard();
+  // createContactCard();
 
   contactCardContainer.innerHTML = "";
   for (let i = 0; i < contactsStorage.length; i++) {
@@ -65,25 +60,25 @@ function displayContactCard() {
                     <div class="savedContact">
                     <i class="fas fa-user"></i>
                       <p type="text" name="savedContactFirstName" class="savedContactFirstName" value="">
-                        ${contactsStorage[i][0]}
+                        ${contactsStorage[i].firstname}
                       </p>
                   </div>
                   <div class="savedContact">
                     <i class="fas fa-user"></i>
                       <p type="text" name="savedContactLastName" class="savedContactLastName" value="">
-                        ${contactsStorage[i][1]}
+                        ${contactsStorage[i].lastname}
                       </p>
                   </div>
                   <div class="savedContact">
                     <i class="fas fa-phone-alt"></i>
                       <p type="text" name="savedContactPhone" class="savedContactPhone" value="">
-                      ${contactsStorage[i][2]}
+                      ${contactsStorage[i].phone}
                       </p>
                   </div>
                   <div class="savedContact">
                     <i class="fas fa-map-marker-alt"></i>
                       <p type="text" name="savedContactEmail" class="savedContactEmail" value="">
-                      ${contactsStorage[i][3]}
+                      ${contactsStorage[i].email}
                       </p>
                   </div>
                   <div>
@@ -96,6 +91,33 @@ function displayContactCard() {
   }
   console.log(contactsStorage);
   console.log(document.querySelectorAll(".savedContactInfo"));
+}
+
+function handleContactSave() {
+  const newContact = {
+    firstname: firstName.value,
+    lastname: lastName.value,
+    email: email.value,
+    phone: phone.value,
+  };
+  console.log(newContact);
+  fetch("/api/contactpost", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newContact),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      contactsStorage.push(data);
+      displayContactCard();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+  clearContactForm();
 }
 
 //search for contact
