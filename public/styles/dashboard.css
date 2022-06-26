@@ -31,14 +31,17 @@ header {
   width: min(400px, 100%);
 }
 
-/* holidays */
+/* contact card info */
 ul {
   list-style: none;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   position: relative;
   perspective: 900px;
   transform-style: preserve-3d;
+  margin: 3rem 0;
+  width: 350px;
+  height: 500px;
 }
 ul > li {
   position: absolute;
@@ -55,7 +58,7 @@ ul > li {
   color: white;
   display: grid;
   grid-template-columns: 2.5rem auto;
-  height: 2.4rem;
+  height: 6.4rem;
   transition: transform 500ms ease, background-color 500ms ease;
 }
 

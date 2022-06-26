@@ -1,17 +1,38 @@
+const cards = [
+  {
+    firstname: 'Dolly',
+    lastname: 'Smith',
+    email: 'iamdolly@gmail.com',
+    phone: '8016495725',
+  },
+  {
+    firstname: 'Paul',
+    lastname: 'Winters',
+    email: 'itscoldoutthere@gmail.com',
+    phone: '8013567152',
+  },
+  {
+    firstname: 'Wendy',
+    lastname: 'Darling',
+    email: 'ibelieveinyoupeter@gmail.com',
+    phone: '8013125468',
+  },
+];
+
 const ulEl = document.querySelector('ul');
 const d = new Date();
 let daynumber = d.getMonth() == 1 ? d.getDate() - 1 : 0;
 let activeIndex = daynumber;
-const rotate = -360 / febHolidays.length;
+const rotate = -360 / cards.length;
 init();
 
 function init() {
-  febHolidays.forEach((holiday, idx) => {
+  cards.forEach((cards, idx) => {
     const liEl = document.createElement('li');
     liEl.style.setProperty('--day_idx', idx);
     liEl.innerHTML = `<time datetime="2022-02-${idx + 1}">${
       idx + 1
-    }</time><span>${holiday}</span>`;
+    }</time><span>${cards}</span>`;
     ulEl.append(liEl);
   });
   ulEl.style.setProperty('--rotateDegrees', rotate);
@@ -25,7 +46,7 @@ function adjustDay(nr) {
   const activeEl = document.querySelector('li.active');
   if (activeEl) activeEl.classList.remove('active');
 
-  activeIndex = (activeIndex + nr + febHolidays.length) % febHolidays.length;
+  activeIndex = (activeIndex + nr + cards.length) % cards.length;
   const newActiveEl = document.querySelector(
     `li:nth-child(${activeIndex + 1})`
   );
@@ -52,46 +73,46 @@ window.addEventListener('keydown', (e) => {
 // information loosely retrieved from the about section
 // https://codepen.io/about/
 // const cards = [
-//     {
-//         name: 'Tim Sabat',
-//         at: '@tsabat',
-//         tag: 'i make the codepens.',
-//     },
-//     {
-//         name: 'Alex Vazquez',
-//         at: '@quezo',
-//         tag: 'Front End Pengineer at CodePen. Loving all the bits and bytes.',
-//     },
-//     {
-//         name: 'Chris Coyier',
-//         at: '@chriscoyier',
-//         tag: 'I\'m kinda into this whole CodePen thing.',
-//     },
-//     {
-//         name: 'Marie Mosley',
-//         at: '@mariemosley',
-//         tag: 'Look out honey \'cause I\'m using technology.',
-//     },
-//     {
-//         name: 'Rachel Smith',
-//         at: '@rachsmith',
-//         tag: 'pixel pusher and JavaScript wrangler at CodePen.',
-//     },
-//     {
-//         name: 'Cassidy Williams',
-//         at: '@cassidoo',
-//         tag: 'I code things.',
-//     },
-//     {
-//         name: 'Klare Frank',
-//         at: '@klare',
-//         tag: 'Leading design at CodePen.',
-//     },
-//     {
-//         name: 'Stephen Shaw',
-//         at: '@shshaw',
-//         tag: 'A rockstar. (Before it was cool).',
-//     },
+//   {
+//     name: 'Tim Sabat',
+//     at: '@tsabat',
+//     tag: 'i make the codepens.',
+//   },
+//   {
+//     name: 'Alex Vazquez',
+//     at: '@quezo',
+//     tag: 'Front End Pengineer at CodePen. Loving all the bits and bytes.',
+//   },
+//   {
+//     name: 'Chris Coyier',
+//     at: '@chriscoyier',
+//     tag: "I'm kinda into this whole CodePen thing.",
+//   },
+//   {
+//     name: 'Marie Mosley',
+//     at: '@mariemosley',
+//     tag: "Look out honey 'cause I'm using technology.",
+//   },
+//   {
+//     name: 'Rachel Smith',
+//     at: '@rachsmith',
+//     tag: 'pixel pusher and JavaScript wrangler at CodePen.',
+//   },
+//   {
+//     name: 'Cassidy Williams',
+//     at: '@cassidoo',
+//     tag: 'I code things.',
+//   },
+//   {
+//     name: 'Klare Frank',
+//     at: '@klare',
+//     tag: 'Leading design at CodePen.',
+//   },
+//   {
+//     name: 'Stephen Shaw',
+//     at: '@shshaw',
+//     tag: 'A rockstar. (Before it was cool).',
+//   },
 // ];
 
 // // array describing the d attributes for the icon included in the avatar
