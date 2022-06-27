@@ -30,7 +30,7 @@ IMAGE:
 
 APPLICATION URL:
 
-(https://shmeeheart.github.io/Open-Sesame-Password-Generator/)
+[DEPLOYED URL FROM HEROKU](https://github.com/sterlingpeck/rolodex)
 
 
 TECHNOLOGIES USED: 
