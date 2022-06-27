@@ -30,7 +30,7 @@ IMAGE:
 
 APPLICATION URL:
 
-[DEPLOYED URL FROM HEROKU](https://github.com/sterlingpeck/rolodex)
+(https://sterlingpeck.github.io/rolodex/)
 
 
 TECHNOLOGIES USED: 
