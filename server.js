@@ -1,5 +1,5 @@
 var express = require("express");
-const fs = require('fs');
+const fs = require("fs");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
@@ -15,12 +15,12 @@ var app = express();
 app.use(express.json());
 app.use(express.static("public"));
 
-app.set("port", 9000);
+app.set("port", 3306);
 
 app.use(morgan("dev"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '')));
+app.use(express.static(path.join(__dirname, "")));
 
 app.use(cookieParser());
 
