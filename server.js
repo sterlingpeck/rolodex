@@ -15,7 +15,7 @@ var app = express();
 app.use(express.json());
 app.use(express.static("public"));
 
-app.set("port", 3306);
+app.set("port", 3001);
 
 app.use(morgan("dev"));
 

@@ -14,6 +14,10 @@
     "node": "^17.7.2",
     "sequelize": "^6.21.0"
   },
+  "production": {
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
+  },
   "scripts": {
     "start": "node server.js"
   },
