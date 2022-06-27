@@ -7,6 +7,10 @@
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
+.firstContactForm input{
+  color: black;
+
+}
 
 .savedContactInfoList {
   display: flex;
