@@ -1,23 +1,23 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var cookieParser = require("cookie-parser");
-var session = require("express-session");
-var morgan = require("morgan");
-var User = require("./models/user");
-var hbs = require("express-handlebars");
-var path = require("path");
-const { v4: uuidv4 } = require("uuid");
-const db = require("./config/connection");
-const { QueryTypes } = require("sequelize");
-var Contact = require("./models/contact_card_model");
+var express = require('express');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var morgan = require('morgan');
+var User = require('./models/user');
+var hbs = require('express-handlebars');
+var path = require('path');
+const { v4: uuidv4 } = require('uuid');
+const db = require('./config/connection');
+const { QueryTypes } = require('sequelize');
+var Contact = require('./models/contact_card_model');
 
 var app = express();
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static('public'));
 
-app.set("port", 9000);
+app.set('port', 9000);
 
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -25,8 +25,8 @@ app.use(cookieParser());
 
 app.use(
   session({
-    key: "user_sid",
-    secret: "secret secret",
+    key: 'user_sid',
+    secret: 'secret secret',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -37,47 +37,47 @@ app.use(
 
 // handle bars config
 app.engine(
-  "hbs",
+  'hbs',
   hbs.engine({
-    extname: "hbs",
-    defaultLayout: "layout",
-    layoutsDir: __dirname + "/views/layouts/",
+    extname: 'hbs',
+    defaultLayout: 'layout',
+    layoutsDir: __dirname + '/views/layouts/',
   })
 );
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 app.use((req, res, next) => {
   if (req.cookies.user_sid && !req.session.user) {
-    res.clearCookie("user_sid");
+    res.clearCookie('user_sid');
   }
   next();
 });
 
 var hbsContent = {
-  userName: "",
+  userName: '',
   loggedin: false,
-  title: "You are not logged in.",
-  body: "",
+  title: 'You are not logged in.',
+  body: '',
 };
 
 var sessionChecker = (req, res, next) => {
   if (req.session.user && req.cookies.user_sid) {
-    res.redirect("/dashboard");
+    res.redirect('/dashboard');
   } else {
     next();
   }
 };
 
 // route for Home-Page
-app.get("/", sessionChecker, (req, res) => {
-  res.redirect("/login");
+app.get('/', sessionChecker, (req, res) => {
+  res.redirect('/login');
 });
 
 // route for user signup
 app
-  .route("/signup")
+  .route('/signup')
   .get((req, res) => {
-    res.render("signup", hbsContent);
+    res.render('signup', hbsContent);
   })
   .post((req, res) => {
     User.create({
@@ -86,18 +86,18 @@ app
     })
       .then((user) => {
         req.session.user = user.dataValues;
-        res.redirect("/dashboard");
+        res.redirect('/dashboard');
       })
       .catch((error) => {
-        res.redirect("/signup");
+        res.redirect('/signup');
       });
   });
 
 // route for user Login
 app
-  .route("/login")
+  .route('/login')
   .get(sessionChecker, (req, res) => {
-    res.render("login", hbsContent);
+    res.render('login', hbsContent);
   })
   .post((req, res) => {
     var username = req.body.username,
@@ -105,18 +105,18 @@ app
 
     User.findOne({ where: { username: username } }).then(function (user) {
       if (!user) {
-        res.redirect("/login");
+        res.redirect('/login');
       } else if (!user.validPassword(password)) {
-        res.redirect("/login");
+        res.redirect('/login');
       } else {
         req.session.user = user.dataValues;
-        res.redirect("/dashboard");
+        res.redirect('/dashboard');
       }
     });
   });
 
 // Create a contact
-app.post("/api/contactpost", ({ body }, res) => {
+app.post('/api/contactpost', ({ body }, res) => {
   Contact.create({
     firstname: body.firstname,
     lastname: body.lastname,
@@ -127,35 +127,35 @@ app.post("/api/contactpost", ({ body }, res) => {
   });
 });
 
-app.get("/api/contactget", (req, res) => {
+app.get('/api/contactget', (req, res) => {
   Contact.findAll().then(function (contacts) {
     res.send(contacts);
   });
 });
 
 // route for user's dashboard
-app.get("/dashboard", (req, res) => {
+app.get('/dashboard', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     hbsContent.loggedin = true;
     hbsContent.userName = req.session.user.username;
     console.log(req.session.user.username);
-    hbsContent.title = "You are logged in";
-    res.sendFile(__dirname + "/public/html/dashboard.html");
+    hbsContent.title = 'You are logged in';
+    res.sendFile(__dirname + '/public/html/dashboard.html');
   } else {
-    res.redirect("/login");
+    res.redirect('/login');
   }
 });
 
 // route for user logout
-app.get("/logout", (req, res) => {
+app.get('/logout', (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     hbsContent.loggedin = false;
-    hbsContent.title = "You are logged out!";
-    res.clearCookie("user_sid");
+    hbsContent.title = 'You are logged out!';
+    res.clearCookie('user_sid');
     console.log(JSON.stringify(hbsContent));
-    res.redirect("/");
+    res.redirect('/');
   } else {
-    res.redirect("/login");
+    res.redirect('/login');
   }
 });
 
@@ -165,6 +165,6 @@ app.use(function (req, res, next) {
 });
 
 // start the express server
-app.listen(app.get("port"), () =>
-  console.log(`App started on port ${app.get("port")}`)
+app.listen(app.get('port'), () =>
+  console.log(`App started on port ${app.get('port')}`)
 );
