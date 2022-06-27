@@ -1,18 +1,25 @@
-let contactsStorage=getContacts;
+// let contactsStorage=getContacts;
 
-const db = require('../../config/connection');
+// const db = require('../../config/connection');
 
-app.use(express.json());
-app.use(express.static('public'));
+// app.use(express.json());
+// app.use(express.static('public'));
 
-const getContacts = () =>
-  fetch('/api/contactget', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  getContacts();
+// const getContacts = () =>
+//   fetch('/api/contactget', {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   });
+//   getContacts();
+
+const cards = [
+  'Kansas Carver kansascarver@gmail.com 1111111111',
+  'V Garcia vgarcia@gmail.com 8019403336',
+  'Jennifer Goodwin goodwije@gmail.com 7203357097',
+  'Sterling Peck peck.sterling@gmail.com 8018244075',
+];
 
 const ulEl = document.querySelector('ul');
 const d = new Date();
@@ -21,90 +28,18 @@ let activeIndex = daynumber;
 const rotate = -360 / cards.length;
 init();
 
-function displayContactCard() {
-  // Loop over the array contactsStorage and insert into the contact page
-
-  createContactCard();
-
-  contactCardContainer.innerHTML = '';
-  for (let i = 0; i < contactsStorage.length; i++) {
-    htmlStr = `<div class="savedContactInfo " id="savedContactInfo">
-                    <div class="savedContact">
-                    <i class="fas fa-user"></i>
-                      <p type="text" name="savedContactFirstName" class="savedContactFirstName" value="">
-                        ${contactsStorage[i][0]}
-                      </p>
-                  </div>
-                  <div class="savedContact">
-                    <i class="fas fa-user"></i>
-                      <p type="text" name="savedContactLastName" class="savedContactLastName" value="">
-                        ${contactsStorage[i][1]}
-                      </p>
-                  </div>
-                  <div class="savedContact">
-                    <i class="fas fa-phone-alt"></i>
-                      <p type="text" name="savedContactPhone" class="savedContactPhone" value="">
-                      ${contactsStorage[i][2]}
-                      </p>
-                  </div>
-                  <div class="savedContact">
-                    <i class="fas fa-map-marker-alt"></i>
-                      <p type="text" name="savedContactEmail" class="savedContactEmail" value="">
-                      ${contactsStorage[i][3]}
-                      </p>
-                  </div>
-                  <div>
-                      
-                      <button type="button" class="btnDel" data-id="${i}">Delete</button>
-                  </div>
-              </div>`;
-
-    contactCardContainer.innerHTML += htmlStr;
-  }
-  console.log(contactsStorage);
-  console.log(document.querySelectorAll('.savedContactInfo'));
-}
-
 function init() {
   cards.forEach((cards, idx) => {
     const liEl = document.createElement('li');
     liEl.style.setProperty('--day_idx', idx);
-    liEl.innerHTML = '';
-    for (let i = 0; i < contactsStorage.length; i++) {
-      htmlStr = `<div class="savedContactInfo " id="savedContactInfo">
-                      <div class="savedContact">
-                      <i class="fas fa-user"></i>
-                        <p type="text" name="savedContactFirstName" class="savedContactFirstName" value="">
-                          ${contactsStorage[i][0]}
-                        </p>
-                    </div>
-                    <div class="savedContact">
-                      <i class="fas fa-user"></i>
-                        <p type="text" name="savedContactLastName" class="savedContactLastName" value="">
-                          ${contactsStorage[i][1]}
-                        </p>
-                    </div>
-                    <div class="savedContact">
-                      <i class="fas fa-phone-alt"></i>
-                        <p type="text" name="savedContactPhone" class="savedContactPhone" value="">
-                        ${contactsStorage[i][2]}
-                        </p>
-                    </div>
-                    <div class="savedContact">
-                      <i class="fas fa-map-marker-alt"></i>
-                        <p type="text" name="savedContactEmail" class="savedContactEmail" value="">
-                        ${contactsStorage[i][3]}
-                        </p>
-                    </div>
-                    <div>
-                        
-                        <button type="button" class="btnDel" data-id="${i}">Delete</button>
-                    </div>
-                </div>`;
+    liEl.innerHTML = `<time datetime="2022-02-${idx + 1}">${
+      idx + 1
+    }</time><span>${cards}</span>`;
     ulEl.append(liEl);
+  });
   ulEl.style.setProperty('--rotateDegrees', rotate);
   adjustDay(0);
-};
+}
 
 function adjustDay(nr) {
   daynumber += nr;
