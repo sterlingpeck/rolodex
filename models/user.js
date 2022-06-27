@@ -1,9 +1,9 @@
-var Sequelize = require("sequelize");
-var bcrypt = require("bcrypt");
-const sequelize = require("../config/connection");
+var Sequelize = require('sequelize');
+var bcrypt = require('bcrypt');
+const sequelize = require('../config/connection');
 
 // setup User model and its fields.
-var User = sequelize.define("users", {
+var User = sequelize.define('users', {
   id: {
     type: Sequelize.INTEGER,
     unique: true,
@@ -39,7 +39,7 @@ sequelize
       "users table has been successfully created, if one doesn't exist"
     )
   )
-  .catch((error) => console.log("This error occured", error));
+  .catch((error) => console.log('This error occured', error));
 
 // export User model for use in other files.
 module.exports = User;

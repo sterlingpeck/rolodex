@@ -1,3 +1,17 @@
+.page-header {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.firstContactForm {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.firstContactForm input{
+  color: black;
+
+}
+
 .savedContactInfoList {
   display: flex;
   flex-wrap: wrap;
@@ -6,9 +20,24 @@
   width: 200px;
 }
 .savedContactInfo {
-  box-shadow: 2px 2px 2px black;
+  background-color: white;
+  box-shadow: 2px 2px 2px slategray;
   border: 1px solid black;
   padding: 10px;
   margin: 5px;
   border-radius: 10px;
+}
+
+#btnsave {
+  background-color: white;
+  color: gray;
+}
+
+body {
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/001/625/337/original/retro-cyberpunk-style-80s-sci-fi-polygon-background-free-video.jpg');
+  background-size: cover;
+}
+
+.search {
+  margin: 11.5px;
 }
