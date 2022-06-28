@@ -68,7 +68,7 @@ APPLICATION CONTRIBUTORS:
 
      -Kansas Carver
 
-     -V Garcia
+     -Valeria Garcia
 
      -Jennifer Goodwin
 
