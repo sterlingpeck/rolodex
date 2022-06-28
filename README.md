@@ -14,7 +14,6 @@ TABLE OF CONTENTS:
 
      -Application Contributors
 
-
 DESCRIPTION:
 
 Allows the user to keep track of homies' information and create a modern rolodex for easy access to one's network.
@@ -68,7 +67,7 @@ APPLICATION CONTRIBUTORS:
 
      -Kansas Carver
 
-     -V Garcia
+     -Valeria Garcia
 
      -Jennifer Goodwin
 
